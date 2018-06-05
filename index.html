@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <title></title>
+  </head>
+  <body>
+    <button type="button" class="joburg" name="button">Forecast for Johannesburg</button>
+    <button type="button" class="capeTown" name="button">Forecast for Cape Town</button>
+
+
+    <div class="content">
+
+    </div>
+  </body>
+<img src="" alt="">
+  <script type="text/javascript">
+    $('.capeTown').on('click', function() {
+      $.getJSON("http://api.wunderground.com/api/9da6f77d5c8ca39e/forecast/q/ZA/Cape_Town.json",function(result){
+        for (i=0;i<=7;i++){
+        let specificDay = result.forecast.txt_forecast.forecastday[i]
+        $('.content').append('<p>'+specificDay.title + ': '+specificDay.fcttext_metric);
+        $('.content').append(`<img src="${specificDay.icon_url}" alt="${specificDay.icon}">`)
+      }
+      });
+    });
+    $('.joburg').on('click', function() {
+      $.getJSON("http://api.wunderground.com/api/9da6f77d5c8ca39e/forecast/q/ZA/Johannesburg.json",function(result){
+        for (i=0;i<=7;i++){
+        let specificDay = result.forecast.txt_forecast.forecastday[i]
+        $('.content').append('<p>'+specificDay.title + ': '+specificDay.fcttext_metric);
+        $('.content').append(`<img src="${specificDay.icon_url}" alt="${specificDay.icon}">`)
+      }
+      });
+    });
+
+
+  </script>
+</html>
